@@ -1,0 +1,36 @@
+{
+  "name": "demo1-reactssr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev:start": "nodemon --watch dist --exec node dist/server.js",
+    "dev:build": "webpack",
+    "dev":"npm-run-all --parallel dev:start dev:build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guoliang724/demo1-ReactSSR.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guoliang724/demo1-ReactSSR/issues"
+  },
+  "homepage": "https://github.com/guoliang724/demo1-ReactSSR#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^3.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.9",
+    "@babel/preset-react": "^7.23.3",
+    "babel-loader": "^9.1.3",
+    "npm-run-all": "^4.1.5",
+    "webpack": "^5.90.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-node-externals": "^3.0.0"
+  }
+}
