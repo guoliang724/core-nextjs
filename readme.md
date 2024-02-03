@@ -51,3 +51,9 @@ Because,server has rendered alread. client is only to regestier events.(take ove
 ##### Soultions:
 1.  isomorphic-style-loader. Make sure that component is able to get accurate hase-named css by `className = {styles["name"]}`. 
 2. by getLinks function as getScripts do. 
+
+
+#### Introduce Images
+1. server side need to handle imges as well, but it does not need to generate it again.
+so, set file-loader emit option to false. 
+2. how to deal with img imported in css by url()? As imges bundled, the path in url() is changed.Through public path.

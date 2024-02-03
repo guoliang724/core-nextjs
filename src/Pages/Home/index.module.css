@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
+  gap:10px
 }
 
 .bodyBtn {
@@ -14,4 +15,20 @@
 
 .bodyText {
   margin-top: 10px;
+}
+.bodyImg{
+  width: 100px;
+  height: 100px;
+}
+.bodycssImg{
+  background-image: url("../../assets/webpack.jpeg"); 
+
+  width: 100px;
+  height: 100px;
+}
+
+.imagesDisplay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import sytles from "./index.module.css";
+import image from "../../assets/webpack.jpeg"
 
 const Home = ()=>{
     let [number,setNumber] = useState(0);
@@ -12,7 +13,19 @@ const Home = ()=>{
          <span>Click to add： </span>
          <button onClick={handleClick} >+</button>
          </div>
-      
+         <div className={sytles.imagesDisplay}>
+            <span>
+                by imge tag: 
+            </span>
+            <img src={image} alt="" className={sytles.bodyImg}/>
+         </div>
+         <div className={sytles.imagesDisplay} >
+            <span>
+                by css url:  
+            </span>
+            <div className={sytles.bodycssImg}/>
+         </div>
+        
         <div className={sytles.bodyText}>{number}</div>
     </div>
 }

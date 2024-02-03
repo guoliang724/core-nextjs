@@ -11,6 +11,7 @@ const clientConfig = {
   output: {
     filename: "js/bundle[hash:5].js",
     path: path.resolve(__dirname, "./public"),
+    publicPath:"/"
   },
   module: {
     rules: [
@@ -31,6 +32,13 @@ const clientConfig = {
           },
         ],
       },
+      {
+        test:/.(png)|(jpeg)|(jpg)|(gif)$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'img/[name].[hash:5].[ext]'
+        }
+      }
     ],
   },
   plugins: [

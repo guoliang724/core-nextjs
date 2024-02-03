@@ -9,6 +9,7 @@ const serverConfig = {
   output: {
     filename: "server.js",
     path: path.resolve(__dirname, "./dist"),
+    publicPath:"/"
   },
   module: {
     rules: [
@@ -28,6 +29,13 @@ const serverConfig = {
           },
         ],
       },
+      {
+        test:/.(png)|(jpeg)|(jpg)|(gif)$/,
+        type: 'asset/resource',
+        generator: {
+          emit: false,
+        },
+      }
     ],
   },
   target: "node",
