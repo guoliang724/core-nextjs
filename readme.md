@@ -1,7 +1,7 @@
 The process of SSR:
 
 ####  Server Render React
-##### Problems to solve
+##### Problems to solve:
 1. import and require;
 2. react-dom can not be used in node.js;
 3. webpack default target is browser.(change to node);
@@ -23,7 +23,7 @@ The process of SSR:
 2. ![avatar](/imgs/client-render.png)
 
 ##### Practice：
-1. the content on client and server side should be consistent with each other.
+1. principle: isomorphic rendering.
 2. node_modules are needed in client side package.
 3. client side package-output-js is requested from clinet and embedded in html tag
    ![avatar](/imgs/embedjs.png)
@@ -31,10 +31,23 @@ The process of SSR:
 Because,server has rendered alread. client is only to regestier events.(take over interaction).No need to reRender.
 
 
-##### Problems
+##### Problems:
 1. To obivate client caches,the output js file got to has hash. Consequently,the name of js file is not foretell. How to embedd it in the script tag?
  ![avatar](/imgs/hashNamedjs.png)
   ![avatar](/imgs/embedjs.png)
 
-##### Solution
+##### Solution:
 1. By using fs module, read the file name synchronously. 
+
+
+#### Introduce Style
+##### Todo:
+1. generate css file;
+2. add a link element in source page;
+
+##### Problems:
+1. css bundle only need to be created only once, and classnames should be consistent with both side in source html. How? 
+2. have yet to link css file to socur html 
+##### Soultions:
+1.  isomorphic-style-loader. Make sure that component is able to get accurate hase-named css by `className = {styles["name"]}`. 
+2. by getLinks function as getScripts do. 

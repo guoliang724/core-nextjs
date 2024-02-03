@@ -1,0 +1,28 @@
+/*!**********************************************************************************************************************************!*\
+  !*** css ./node_modules/_css-loader@6.10.0@css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/Pages/Home/index.module.css ***!
+  \**********************************************************************************************************************************/
+.container--e801c {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.bodyBtn--c408a {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+
+.bodyText--c5e33 {
+  margin-top: 10px;
+}
+/*!************************************************************************************************************************!*\
+  !*** css ./node_modules/_css-loader@6.10.0@css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/assets/global.css ***!
+  \************************************************************************************************************************/
+body {
+    padding: 50px;
+}
+
+/*# sourceMappingURL=bundle.f9249.css.map*/
