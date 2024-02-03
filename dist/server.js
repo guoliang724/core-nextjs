@@ -16,7 +16,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 const Home = () => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Home Page Test");
+  let [number, setNumber] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
+  const handleClick = () => {
+    console.log("+++++++++=handleClick");
+    setNumber(++number);
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: handleClick
+  }, "+"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, number));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Home);
 
@@ -44,6 +51,26 @@ const App = () => {
 
 /***/ }),
 
+/***/ "./src/server/getScripts.js":
+/*!**********************************!*\
+  !*** ./src/server/getScripts.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* export default binding */ __WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! fs */ "fs");
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__() {
+  const fileNames = fs__WEBPACK_IMPORTED_MODULE_0___default().readdirSync("./public/js").filter(file => file.endsWith(".js")).map(file => `<script src='./js/${file}'></script>`);
+  return fileNames.join("\n");
+}
+
+/***/ }),
+
 /***/ "./src/server/render.js":
 /*!******************************!*\
   !*** ./src/server/render.js ***!
@@ -59,6 +86,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app */ "./src/server/app.jsx");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _getScripts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./getScripts */ "./src/server/getScripts.js");
+
 
 
 
@@ -71,10 +100,12 @@ __webpack_require__.r(__webpack_exports__);
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>SSR</title>
     </head>
     <body>
-        ${renderHtml}
+        <div id="root">${renderHtml}
+        </div>
+        ${(0,_getScripts__WEBPACK_IMPORTED_MODULE_3__["default"])()}
     </body>
     </html>
     `;
@@ -110,6 +141,16 @@ module.exports = require("react");
 /***/ ((module) => {
 
 module.exports = require("react-dom/server");
+
+/***/ }),
+
+/***/ "fs":
+/*!*********************!*\
+  !*** external "fs" ***!
+  \*********************/
+/***/ ((module) => {
+
+module.exports = require("fs");
 
 /***/ })
 

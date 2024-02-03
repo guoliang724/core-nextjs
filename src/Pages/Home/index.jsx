@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Home = ()=>{
-    return <div>Home Page Test</div>
+    let [number,setNumber] = useState(0);
+    const handleClick = ()=>{
+        console.log("+++++++++=handleClick")
+        setNumber(++number)
+    }
+    return <div>
+        <button onClick={handleClick}>+</button>
+        <div>{number}</div>
+    </div>
 }
 
 export default Home;

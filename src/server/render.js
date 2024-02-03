@@ -1,6 +1,7 @@
 import { renderToString } from "react-dom/server";
 import App from "./app";
 import React from "react";
+import getScripts from "./getScripts";
 
 export default (req,res)=>{
     const renderHtml = renderToString(<App/>);
@@ -11,10 +12,12 @@ export default (req,res)=>{
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>SSR</title>
     </head>
     <body>
-        ${renderHtml}
+        <div id="root">${renderHtml}
+        </div>
+        ${getScripts()}
     </body>
     </html>
     `

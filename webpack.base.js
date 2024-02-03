@@ -1,15 +1,10 @@
 const path = require("path");
-const excludeNodeModules = require("webpack-node-externals");
+
+
 
 module.exports = {
     mode:"development",
-    devtool:"source-map",
-    entry:"./src/server",
-    output:{
-      filename:"server.js"
-    },
     watch:true,
-    target:"node",
     module:{
         rules:[
             {
@@ -30,5 +25,4 @@ module.exports = {
         },
         extensions:[".js",".jsx",".css"]
     },
-    externals:[excludeNodeModules()],
 }
