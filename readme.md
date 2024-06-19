@@ -1,34 +1,41 @@
 The process of SSR:
 
 ####  Server Render React
-##### Problems to solve:
-1. import and require;
-2. react-dom can not be used in node.js;
-3. webpack default target is browser.(change to node);
-4. node_modules is not needed to packed to the client side;
-5. dev build ==> dev start. Two commands run separately.
-##### Solutions:
-1. use webpack to compile;
+Coding react component on the server side. 
+##### Problems:
+1. node.js cannot regnize jsx syntax and cannot use import by defualt;
+   A: use webpack to compile, transer the JSXs to createElement(). Packages involved: `babel-loader` and `preset-react`;
 
-4. using webpack-node-externals to exclude the node_modules folder.
-5. npm-run-all. Run commands in parallel.
+2. react-dom is used for browser, not for node.js
+   A: instead of ReactDom.render(), we use ReactDom.renderToString().
+
+3. webpack will include react and other packages in its output, how to exclude node_modules?
+   A: using `webpack-node-externals`. when react and other packages are done their works, we do not need it to exist on the output.
    
-##### Practice:
-1. "react-dom": reactDom.render ==> "react-dom/server": reactDom.renderToString;\
-   
+4. register a domEvent on the server side, while the code is passed to the client side, the event does not exist on the source code, why?
+   A: The server side will display the original html(pure string). It does not have doms on it. We know that in React, events in JSX will be trasfer to the code: 
+   ```
+   dom.addEventListener('x',()=>{},false);
+   ```
+   however,there is no dom on server. Neither the component life circle 
 
 #### Client Render React
 ##### why?
-1. the server side does not have a dom. As we know, events in react are delegated by document.Therefore, there are no events and react lifecircle. 
-2. ![avatar](/imgs/client-render.png)
+1. No doms and component life circle. How to solve it?
+   ![avatar](/imgs/client-render.png)
+   A: First of all, to request html page;
+      Then, to request the server again on the behalf of js embedded in the html page.
+      Then, the browser is to take over the subsequent process. 
+
+2. The html structure on both side should be same. What is hydrate? what is the difference between render() and hydrate()?
+   A: As the server has parsed each React element, on the client side, it does not have to be rendered again, where only events need to be added to. Instead of using render, using hydrate is more approperiate。
 
 ##### Practice：
 1. principle: isomorphic rendering.
 2. node_modules are needed in client side package.
 3. client side package-output-js is requested from clinet and embedded in html tag
    ![avatar](/imgs/embedjs.png)
-4. why is ReactDOM.hydrate, not ReactDOM.render? 
-Because,server has rendered alread. client is only to regestier events.(take over interaction).No need to reRender.
+
 
 
 ##### Problems:
