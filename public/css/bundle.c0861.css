@@ -1,0 +1,45 @@
+/*!***************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/Pages/Home/index.module.css ***!
+  \***************************************************************************************************************/
+.container--e801c {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap:10px
+}
+
+.bodyBtn--c408a {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+
+.bodyText--c5e33 {
+  margin-top: 10px;
+}
+.bodyImg--c6307{
+  width: 100px;
+  height: 100px;
+}
+.bodycssImg--aa506{
+  background-image: url(/img/webpack.c33f8..jpeg); 
+
+  width: 100px;
+  height: 100px;
+}
+
+.imagesDisplay--b2884 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/*!*****************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/assets/global.css ***!
+  \*****************************************************************************************************/
+body {
+    padding: 50px;
+}
+
+/*# sourceMappingURL=bundle.c0861.css.map*/

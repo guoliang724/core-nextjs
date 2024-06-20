@@ -1,9 +1,13 @@
 import React from "react";
-import Home from "../Pages/Home";
+import { BrowserRouter } from "react-router-dom"
+
+import RouteApp from "../routes/RouteApp";
 import "../assets/global.css"
 
 const App =  ()=>{
-    return <Home/>;
+    return <BrowserRouter>
+        <RouteApp/>
+    </BrowserRouter>;
 }
 
 export default App;

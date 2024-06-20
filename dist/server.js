@@ -49,9 +49,9 @@ const Home = () => {
 
 /***/ }),
 
-/***/ "./src/server/app.jsx":
+/***/ "./src/server/App.jsx":
 /*!****************************!*\
-  !*** ./src/server/app.jsx ***!
+  !*** ./src/server/App.jsx ***!
   \****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -62,13 +62,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Pages_Home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Pages/Home */ "./src/Pages/Home/index.jsx");
+/* harmony import */ var react_router_dom_server__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom/server */ "react-router-dom/server");
+/* harmony import */ var react_router_dom_server__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_router_dom_server__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Pages_Home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Pages/Home */ "./src/Pages/Home/index.jsx");
 
 
-const App = () => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Pages_Home__WEBPACK_IMPORTED_MODULE_1__["default"], null);
+
+const App = ({
+  location,
+  context
+}) => {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom_server__WEBPACK_IMPORTED_MODULE_1__.StaticRouter, {
+    context: context,
+    location: location
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Pages_Home__WEBPACK_IMPORTED_MODULE_2__["default"], null));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
+
+/***/ }),
+
+/***/ "./src/server/getHtml.js":
+/*!*******************************!*\
+  !*** ./src/server/getHtml.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _getScripts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getScripts */ "./src/server/getScripts.js");
+/* harmony import */ var _getLinks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getLinks */ "./src/server/getLinks.js");
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (componentHTML => {
+  const html = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SSR</title>
+        ${(0,_getLinks__WEBPACK_IMPORTED_MODULE_1__["default"])()}
+    </head>
+    <body>
+        <div id="root">${componentHTML}
+        </div>
+        ${(0,_getScripts__WEBPACK_IMPORTED_MODULE_0__["default"])()}
+    </body>
+    </html>
+    `;
+  return html;
+});
 
 /***/ }),
 
@@ -128,44 +174,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-dom/server */ "react-dom/server");
 /* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app */ "./src/server/app.jsx");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _getScripts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./getScripts */ "./src/server/getScripts.js");
-/* harmony import */ var _getLinks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./getLinks */ "./src/server/getLinks.js");
-
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App */ "./src/server/App.jsx");
+/* harmony import */ var _getHtml__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./getHtml */ "./src/server/getHtml.js");
 
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((req, res) => {
-  const renderHtml = (0,react_dom_server__WEBPACK_IMPORTED_MODULE_0__.renderToString)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_app__WEBPACK_IMPORTED_MODULE_1__["default"], null));
-  console.log(renderHtml);
-  const html = `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>SSR</title>
-        ${(0,_getLinks__WEBPACK_IMPORTED_MODULE_4__["default"])()}
-    </head>
-    <body>
-        <div id="root">${renderHtml}
-        </div>
-        ${(0,_getScripts__WEBPACK_IMPORTED_MODULE_3__["default"])()}
-    </body>
-    </html>
-    `;
+  const context = {};
+  const ComponentHTML = (0,react_dom_server__WEBPACK_IMPORTED_MODULE_0__.renderToString)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_App__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    location: req.path,
+    context: context
+  }));
+  console.log(ComponentHTML);
+  (0,_getHtml__WEBPACK_IMPORTED_MODULE_3__["default"])(ComponentHTML);
   res.send(html);
 });
 
 /***/ }),
 
-/***/ "./node_modules/_css-loader@6.10.0@css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/Pages/Home/index.module.css":
-/*!******************************************************************************************************************************!*\
-  !*** ./node_modules/_css-loader@6.10.0@css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/Pages/Home/index.module.css ***!
-  \******************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/Pages/Home/index.module.css":
+/*!***********************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/Pages/Home/index.module.css ***!
+  \***********************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -173,19 +206,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_6_10_0_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/_css-loader@6.10.0@css-loader/dist/runtime/sourceMaps.js */ "./node_modules/_css-loader@6.10.0@css-loader/dist/runtime/sourceMaps.js");
-/* harmony import */ var _node_modules_css_loader_6_10_0_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_6_10_0_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_6_10_0_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/_css-loader@6.10.0@css-loader/dist/runtime/api.js */ "./node_modules/_css-loader@6.10.0@css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_css_loader_6_10_0_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_6_10_0_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _node_modules_css_loader_6_10_0_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/_css-loader@6.10.0@css-loader/dist/runtime/getUrl.js */ "./node_modules/_css-loader@6.10.0@css-loader/dist/runtime/getUrl.js");
-/* harmony import */ var _node_modules_css_loader_6_10_0_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_6_10_0_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__);
 // Imports
 
 
 
 var ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/webpack.jpeg */ "./src/assets/webpack.jpeg"), __webpack_require__.b);
-var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_6_10_0_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_6_10_0_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
-var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_6_10_0_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `.container--e801c {
   width: 100%;
@@ -235,10 +268,10 @@ ___CSS_LOADER_EXPORT___.locals = {
 
 /***/ }),
 
-/***/ "./node_modules/_css-loader@6.10.0@css-loader/dist/runtime/api.js":
-/*!************************************************************************!*\
-  !*** ./node_modules/_css-loader@6.10.0@css-loader/dist/runtime/api.js ***!
-  \************************************************************************/
+/***/ "./node_modules/css-loader/dist/runtime/api.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/css-loader/dist/runtime/api.js ***!
+  \*****************************************************/
 /***/ ((module) => {
 
 "use strict";
@@ -330,10 +363,10 @@ module.exports = function (cssWithMappingToString) {
 
 /***/ }),
 
-/***/ "./node_modules/_css-loader@6.10.0@css-loader/dist/runtime/getUrl.js":
-/*!***************************************************************************!*\
-  !*** ./node_modules/_css-loader@6.10.0@css-loader/dist/runtime/getUrl.js ***!
-  \***************************************************************************/
+/***/ "./node_modules/css-loader/dist/runtime/getUrl.js":
+/*!********************************************************!*\
+  !*** ./node_modules/css-loader/dist/runtime/getUrl.js ***!
+  \********************************************************/
 /***/ ((module) => {
 
 "use strict";
@@ -366,10 +399,10 @@ module.exports = function (url, options) {
 
 /***/ }),
 
-/***/ "./node_modules/_css-loader@6.10.0@css-loader/dist/runtime/sourceMaps.js":
-/*!*******************************************************************************!*\
-  !*** ./node_modules/_css-loader@6.10.0@css-loader/dist/runtime/sourceMaps.js ***!
-  \*******************************************************************************/
+/***/ "./node_modules/css-loader/dist/runtime/sourceMaps.js":
+/*!************************************************************!*\
+  !*** ./node_modules/css-loader/dist/runtime/sourceMaps.js ***!
+  \************************************************************/
 /***/ ((module) => {
 
 "use strict";
@@ -400,8 +433,8 @@ module.exports = function (item) {
 
 
     var refs = 0;
-    var css = __webpack_require__(/*! !!../../../node_modules/_css-loader@6.10.0@css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./index.module.css */ "./node_modules/_css-loader@6.10.0@css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/Pages/Home/index.module.css");
-    var insertCss = __webpack_require__(/*! !../../../node_modules/_isomorphic-style-loader@5.3.2@isomorphic-style-loader/insertCss.js */ "./node_modules/_isomorphic-style-loader@5.3.2@isomorphic-style-loader/insertCss.js");
+    var css = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./index.module.css */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/Pages/Home/index.module.css");
+    var insertCss = __webpack_require__(/*! !../../../node_modules/isomorphic-style-loader/insertCss.js */ "./node_modules/isomorphic-style-loader/insertCss.js");
     var content = typeof css === 'string' ? [[module.id, css, '']] : css;
 
     exports = module.exports = css.locals || {};
@@ -417,10 +450,10 @@ module.exports = function (item) {
 
 /***/ }),
 
-/***/ "./node_modules/_isomorphic-style-loader@5.3.2@isomorphic-style-loader/insertCss.js":
-/*!******************************************************************************************!*\
-  !*** ./node_modules/_isomorphic-style-loader@5.3.2@isomorphic-style-loader/insertCss.js ***!
-  \******************************************************************************************/
+/***/ "./node_modules/isomorphic-style-loader/insertCss.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/isomorphic-style-loader/insertCss.js ***!
+  \***********************************************************/
 /***/ ((module) => {
 
 "use strict";
@@ -562,6 +595,17 @@ module.exports = require("react");
 
 "use strict";
 module.exports = require("react-dom/server");
+
+/***/ }),
+
+/***/ "react-router-dom/server":
+/*!******************************************!*\
+  !*** external "react-router-dom/server" ***!
+  \******************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("react-router-dom/server");
 
 /***/ }),
 

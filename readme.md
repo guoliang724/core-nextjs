@@ -20,7 +20,6 @@ Coding react component on the server side.
    however,there is no dom on server. Neither the component life circle 
 
 #### Client Render React
-##### why?
 1. No doms and component life circle. How to solve it?
    ![avatar](/imgs/client-render.png)
    A: First of all, to request html page;
@@ -29,38 +28,24 @@ Coding react component on the server side.
 
 2. The html structure on both side should be same. What is hydrate? what is the difference between render() and hydrate()?
    A: As the server has parsed each React element, on the client side, it does not have to be rendered again, where only events need to be added to. Instead of using render, using hydrate is more approperiate。
-
-##### Practice：
-1. principle: isomorphic rendering.
-2. node_modules are needed in client side package.
-3. client side package-output-js is requested from clinet and embedded in html tag
    ![avatar](/imgs/embedjs.png)
-
-
-
-##### Problems:
-1. To obivate client caches,the output js file got to has hash. Consequently,the name of js file is not foretell. How to embedd it in the script tag?
- ![avatar](/imgs/hashNamedjs.png)
-  ![avatar](/imgs/embedjs.png)
-
-##### Solution:
-1. By using fs module, read the file name synchronously. 
 
 
 #### Introduce Style
 ##### Todo:
-1. generate css file;
-2. add a link element in source page;
+1. to be able to import a css file;
+2. to add a link element in html source page;
 
 ##### Problems:
-1. css bundle only need to be created only once, and classnames should be consistent with both side in source html. How? 
-2. have yet to link css file to socur html 
-##### Soultions:
-1.  isomorphic-style-loader. Make sure that component is able to get accurate hase-named css by `className = {styles["name"]}`. 
-2. by getLinks function as getScripts do. 
+1. Css-output need to be created only once, and classnames should be consistent within both side. How? 
+   A. isomorphic-style-loader. Make sure that components are able to get accurate hase-named css by `className = {styles["name"]}`. 
+   The client side needs to have a complete style dependecies, while the server side need not. However, make sure that each element className on both side are same.
+2. To dynamically link css file to socur html and js can do it.
 
-
-#### Introduce Images
-1. server side need to handle imges as well, but it does not need to generate it again.
-so, set file-loader emit option to false. 
-2. how to deal with img imported in css by url()? As imges bundled, the path in url() is changed.Through public path.
+#### Introduce router
+##### how to use router in server side
+1. BrowserRouter run on the clinet regularly need dom. As it will operate browser API,like history.
+   A: by using staticRouter.  
+   ```
+      <StaticRouter location = {location} content ={ content }></StaticRouter>
+   ```
