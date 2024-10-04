@@ -38,7 +38,7 @@ const serverConfig = {
       }
     ],
   },
-  target: "node",
+  target: "node", // default target is browser
   externals: [excludeNodeModules()],
 };
 

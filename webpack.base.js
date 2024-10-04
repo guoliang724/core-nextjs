@@ -21,6 +21,6 @@ module.exports = {
         alias:{
             "@":path.resolve(__dirname,"src")
         },
-        extensions:[".js",".jsx",".css"]
+        extensions:[".js",".jsx",".css"]  // support extension
     },
 }

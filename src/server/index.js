@@ -1,7 +1,7 @@
 import render from "./render";
 
 const express = require("express");
-const app = express();
+const app = express();3
 
 app.use(express.static("./public"))
 
