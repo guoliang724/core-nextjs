@@ -51,6 +51,14 @@ import Home from "./pages/Home"
    The client side needs to have a complete style dependecies, while the server side need not. However, make sure that each element className on both side are same.
 2. add `<link>` tag into source html page to get the css file.
 
+#### Introduce Pictures
+##### to do:
+1. client side is responsible for generating pictures;
+2. server side makes sure that the source path is the same.
+3. in css, when `background:url('')` is used, after packaged, the location of css file has been changed, but the `url_path` is still the original path. In result, the image file cannot be find.(did not set up `publicPath` under `output` in webpack configuaration)
+   
+on the server side, `file-loader` should be configuared, on one hand, image file is able to be recognized, on the other hand, server side need get img src_path.  
+
 #### Introduce router
 ##### how to use router in server side
 1. BrowserRouter run on the clinet regularly need dom. As it will operate browser API,like history.
