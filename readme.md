@@ -1,8 +1,36 @@
 ### Build a SSR application from scratch:
 
-#### 1. build express server
+#### 1. CSR vs SSR
+##### CSR
+![avatar](/imgs/CSR.png)
 
-#### 2. server render React
+the process is like below:
+1. the browser send a request to the server;
+2. the server response with **an empty html**;
+3. the browser is in a white screen state;
+4. the browser sent multiple request to the server for css, image and js
+5. the server response with the corresponding resources;
+6. the broswer excute the js;
+7. the broswer is to render the page
+
+the disadvantages:
+1. the browser stays in a white screen for a while;
+2. not good for SEO 
+
+##### SSR
+![avatar](/imgs/SSR.png)
+the process is like below:
+1. the browser send a request to the server;
+2. the server response with **a full content html**;
+3. the broswer rendering the page;
+4. the browser send multiple requests to the server for css, image and js
+5. the server response with the corresponding resources;
+6. the broswer excute the js;
+7. **the browser take controll over the subsequent process**
+
+#### 2. build express server
+
+#### 3. server render React
 react component on the server side. 
 ```js
 import Home from "./pages/Home"
@@ -61,8 +89,11 @@ on the server side, `file-loader` should be configuared, on one hand, image file
 
 #### Introduce router
 ##### how to use router in server side
-1. BrowserRouter run on the clinet regularly need dom. As it will operate browser API,like history.
-   A: by using staticRouter.  
+1. That introduce BrowserRouter into client side works fine. THe process is like this: As the server side can't implement BrowserRouter, so when it comes to route like `/news`, the sever side return the `/home` page, and the client side got the js file, and the browser runs the js file, and as a result of the route, client side go to the `/news` page. So, the news page is rendered, but the source html is home page.
+   1. use staticRouter on the server side.  
+   ```js
+      <StaticRouter 
+      location = {location} 
+      context={context}></StaticRouter>
    ```
-      <StaticRouter location = {location} content ={ content }></StaticRouter>
-   ```
+   2. in order to dynamicly get location and set the value into StaticRouter location property, http request need to be passed into `<App location={location} context={context}/>` 
