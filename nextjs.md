@@ -16,14 +16,17 @@
 `[[...filter]]`
 
 #### - intercepting route
+
 `()image`
+
 #### - route groups
+
 - it does not account for a route within an url
 - every route group has its layout.tsx
-- only main page group has page.tsx 
+- only main page group has page.tsx
 - other files in the same level like no-found,error page should be included in one of the group
-`(content)`, under it, there is no page.tsx
-`(marketing)`, this is main page and it has page.tsx
+  `(content)`, under it, there is no page.tsx
+  `(marketing)`, this is main page and it has page.tsx
 
 ### Data mutation:
 
@@ -70,8 +73,8 @@ onst createSinppet = createSnippet.bind(null,code);
 const [formState,action] = useFormState(createSnippet,{message:""})
 <form aciton='action'></form>
 ```
-- when the server action throw an error, define a error.tsx page or catch the error
 
+- when the server action throw an error, define a error.tsx page or catch the error
 
 ### Caching:
 
@@ -91,7 +94,6 @@ Nextjs Performs Aggressive Caching
      ![avatar](/imgs/static-prerender.png)
   4. `revalidatePath()`
 
-
 #### change static route to dynamic route:
 
 - calling a 'dynamic function' or referencing a 'dynamic variable' when you
@@ -106,10 +108,11 @@ Nextjs Performs Aggressive Caching
   2. `/news/[id]/edit/page.tsx`
 
 ##### change dynamic page to static page:
+
 - will render each page and cache them
 - by using generateStaticPath
 - it is a pure production mode
-  
+
 ![avatar](/imgs/dynamictostatic.png)
 
 ```js
@@ -123,6 +126,7 @@ Nextjs Performs Aggressive Caching
    })
   }
 ```
+
 ![avatar](/imgs/multiple-id-page.png)
 
 ##### Several ways to control caching
@@ -134,14 +138,9 @@ Nextjs Performs Aggressive Caching
 ##### on demand cache invalidation with revalidatePath and revalidateTag
 
 - `revalidatePath()`
-- `revalidateTag()`: set a tag group in fetch configuration to set cache to `stale` status 
+- `revalidateTag()`: set a tag group in fetch configuration to set cache to `stale` status
 
 ##### third party to manipulate data
+
 - cach() from `react` to wrappe the server action to make it a request cachable
-- nostable_cach from `next/cach` to wrappe the cach() to make it a data cachable 
-
-### Optimization
-#### optimizing images
-#### optimizing metadata
-
-### Authentication
+- nostable_cach from `next/cach` to wrappe the cach() to make it a data cachable
